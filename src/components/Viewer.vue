@@ -5,10 +5,10 @@ import useViewer from '../composables/useViewer'
 
 const props = withDefaults(defineProps<{
     value: string
-    plugins?: PluginName[]
+    plugins?: any[]
     darkMode?: boolean
 }>(), {
-    plugins: (): PluginName[] => [],
+    plugins: (): any[] => [],
     darkMode: false
 })
 
@@ -23,8 +23,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <div
-        :class="{ 'toastui-editor-dark': darkMode }"
-        ref="viewer"
-    />
+    <div :class="{ 'toastui-editor-dark': darkMode }" ref="viewer" />
 </template>
