@@ -1,5 +1,5 @@
 {
-    "name": "tui-editor-vue3",
+    "name": "tui-editor-vue-3",
     "version": "0.1.3",
     "scripts": {
         "build": "rimraf dist && vue-tsc && vite build",
