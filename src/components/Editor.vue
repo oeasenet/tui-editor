@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import { ref, onMounted, watch, nextTick } from 'vue'
 import useEditor from '../composables/useEditor'
-import { PluginName } from '../utils/TuiPlugins'
+import { Plugin } from '../utils/TuiPlugins'
 import { ToolbarItemOptions } from '@toast-ui/editor/types/ui'
 import Editor, { EditorType, PreviewStyle } from '@toast-ui/editor'
 
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
     height: '500px',
     initialEditType: 'markdown',
     modelValue: '',
-    plugins: (): PluginName[] => [],
+    plugins: (): Plugin[] => [],
     previewStyle: 'tab',
     toolbarItems: () => [
         ['heading', 'bold', 'italic'],
