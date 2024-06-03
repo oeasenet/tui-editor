@@ -23,6 +23,7 @@ export default (elRef: Ref<HTMLElement | null>, options: Options) => {
         el: elRef.value,
         plugins: options.plugins,
         initialValue: options.initialValue,
+        customHTMLSanitizer: (html) => html,
     });
 
     return e;

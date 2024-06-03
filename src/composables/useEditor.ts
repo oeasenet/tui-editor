@@ -65,6 +65,7 @@ export default (elRef: Ref<HTMLElement | null>, options: Options) => {
         toolbarItems: options.toolbarItems,
         usageStatistics: options.usageStatistics,
         useCommandShortcut: options.useCommandShortcut,
+        customHTMLSanitizer: (html) => html,
 
         events: {
             change: options.onChange
