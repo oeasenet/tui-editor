@@ -1,6 +1,6 @@
 {
     "name": "@cedric.dinont/tui-editor-vue3",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "scripts": {
         "build": "rimraf dist && vue-tsc && vite build",
         "docs:dev": "vitepress dev docs",

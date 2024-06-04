@@ -26053,6 +26053,7 @@ const oVe = (t, e) => {
     toolbarItems: e.toolbarItems,
     usageStatistics: e.usageStatistics,
     useCommandShortcut: e.useCommandShortcut,
+    customHTMLSanitizer: (n) => n,
     events: {
       change: e.onChange ? () => e.onChange && e.onChange(r) : () => {
       }
@@ -32566,7 +32567,8 @@ const vVe = /* @__PURE__ */ nJ(fVe), dVe = (t, e) => {
   return new vVe({
     el: t.value,
     plugins: e.plugins,
-    initialValue: e.initialValue
+    initialValue: e.initialValue,
+    customHTMLSanitizer: (n) => n
   });
 }, pVe = /* @__PURE__ */ Wp({
   __name: "Viewer",
