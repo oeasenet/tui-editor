@@ -1,22 +1,11 @@
-# @oeasenet/tui-editor - Toast UI Editor for Vue 3
+# Toast UI Editor for Vue 3
 
 [![npm version](https://img.shields.io/npm/v/@oeasenet/tui-editor.svg)](https://www.npmjs.com/package/@oeasenet/tui-editor)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![license](https://img.shields.io/npm/l/@oeasenet/tui-editor.svg)](https://github.com/oeasenet/tui-editor/blob/main/LICENSE)
 
-A Vue 3 wrapper for the powerful [Toast UI Markdown Editor](https://ui.toast.com/tui-editor), maintained by [OEASE](https://github.com/oeasenet).
+> Vue 3 wrapper components for [TOAST UI Editor](https://ui.toast.com/tui-editor).
 
-## Features
-
-- 📝 Full-featured markdown editor with preview
-- 🔌 Vue 3 components with TypeScript support
-- 🌓 Light and dark mode support
-- 🖼️ Image upload capabilities
-- 🔍 Syntax highlighting
-- 📊 Plugin support for charts, table cells, UML diagrams, and more
-- 📱 Responsive design with fullscreen mode
-- 🧩 Easy integration with Vue 3 applications
-
-## Installation
+## 📦 Installation
 
 ```bash
 # npm
@@ -29,7 +18,7 @@ yarn add @oeasenet/tui-editor
 pnpm add @oeasenet/tui-editor
 ```
 
-## Usage
+## 🚀 Usage
 
 ### Global Registration
 
@@ -37,116 +26,103 @@ pnpm add @oeasenet/tui-editor
 // main.js
 import { createApp } from 'vue'
 import App from './App.vue'
-import TuiEditor from '@oeasenet/tui-editor'
+import TuiEditorPlugin from '@oeasenet/tui-editor'
 import '@oeasenet/tui-editor/dist/style.css'
 
 const app = createApp(App)
-app.use(TuiEditor)
+app.use(TuiEditorPlugin)
 app.mount('#app')
 ```
 
-### Component Registration
+### Local Registration
 
 ```vue
 <script setup>
-import { ref } from 'vue'
 import { Editor, Viewer } from '@oeasenet/tui-editor'
 import '@oeasenet/tui-editor/dist/style.css'
-
-const content = ref('# Hello, world!')
 </script>
 
 <template>
-  <Editor v-model="content" />
+  <Editor v-model="content" height="500px" />
   <Viewer :value="content" />
 </template>
 ```
 
-## Components
+## 🔧 Components
 
 ### Editor
 
-The Editor component provides a full-featured markdown editor with preview capabilities.
+A full-featured markdown editor with WYSIWYG editing capabilities.
 
-```vue
-<Editor v-model="content" />
+#### Props
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `modelValue` | `String` | `''` | Markdown content (v-model) |
+| `height` | `String` | `'500px'` | Editor height |
+| `initialEditType` | `'markdown' \| 'wysiwyg'` | `'markdown'` | Initial editor type |
+| `previewStyle` | `'tab' \| 'vertical'` | `'tab'` | Preview style |
+| `toolbarItems` | `Array` | See below | Toolbar items |
+| `plugins` | `Array` | `[]` | Editor plugins |
+| `darkMode` | `Boolean` | `false` | Enable dark mode |
+| `hideModeSwitch` | `Boolean` | `false` | Hide mode switch tab |
+| `enhanced` | `Boolean` | `true` | Enable enhanced UI features |
+| `allowFullScreen` | `Boolean` | `true` | Allow fullscreen mode |
+| `language` | `String` | `undefined` | Editor language |
+| `usageStatistics` | `Boolean` | `undefined` | Enable usage statistics |
+| `useCommandShortcut` | `Boolean` | `undefined` | Enable keyboard shortcuts |
+| `editorClasses` | `Object \| String \| Array` | `undefined` | CSS classes for editor |
+
+Default toolbar items:
+```js
+[
+  ['heading', 'bold', 'italic'],
+  ['quote', 'ul', 'ol'],
+  ['table', 'link']
+]
 ```
 
-#### Editor Props
+#### Events
 
-| Name               | Type                                 | Default      | Description |
-| ------------------ | ------------------------------------ | ------------ | ----------- |
-| allowFullScreen    | `boolean`                            | `true`       | Enable fullscreen mode |
-| darkMode           | `boolean`                            | `false`      | Enable dark mode |
-| editorClasses      | `object \| string \| string[]`       | `undefined`  | Classes to bind to the editor element |
-| enhanced           | `boolean`                            | `true`       | Enable enhanced CSS in normal and fullscreen mode |
-| height             | `string`                             | `'500px'`    | Height of the editor |
-| hideModeSwitch     | `boolean`                            | `undefined`  | Hide the mode switch tab |
-| initialEditType    | `EditorType`                         | `'markdown'` | Initial editor type ('markdown' or 'wysiwyg') |
-| language           | `string`                             | `undefined`  | Editor language |
-| plugins            | `PluginName[]`                       | `[]`         | Array of plugin names to use |
-| previewStyle       | `PreviewStyle`                       | `'tab'`      | Preview style in markdown mode ('tab' or 'vertical') |
-| toolbarItems       | `(string \| ToolbarItemOptions)[][]` | *            | Toolbar configuration |
-| usageStatistics    | `boolean`                            | `undefined`  | Enable usage statistics |
-| useCommandShortcut | `boolean`                            | `undefined`  | Enable keyboard shortcuts |
-| modelValue         | `string`                             | `undefined`  | Editor content (for v-model) |
+| Name | Parameters | Description |
+| --- | --- | --- |
+| `update:modelValue` | `(value: string)` | Emitted when content changes |
+| `addImage` | `({ blob, callback })` | Emitted when an image is added |
+| `fullScreenChange` | `(value: boolean)` | Emitted when fullscreen mode changes |
 
-* Default toolbar: `[['heading', 'bold', 'italic'], ['quote', 'ul', 'ol'], ['table', 'link']]`
+#### Exposing
 
-#### Editor Events
-
-| Name              | Parameters | Description       |
-| ----------------- | ---------- | ----------------- |
-| update:modelValue | `string`   | Emitted when content changes (for v-model) |
-| addImage          | *          | Emitted when an image is added |
-| fullScreenChange  | `boolean`  | Emitted when fullscreen mode changes |
-
-* `{ blob, callback }: { blob: File | Blob, callback: HookCallback }`
+| Name | Type | Description |
+| --- | --- | --- |
+| `editor` | `Editor \| null` | The underlying Toast UI Editor instance |
 
 ### Viewer
 
-The Viewer component displays rendered markdown content.
+Renders markdown content as HTML with the same styling as the editor.
 
-```vue
-<Viewer :value="content" />
-```
+#### Props
 
-#### Viewer Props
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `String` | Required | Markdown content to display |
+| `plugins` | `Array` | `[]` | Viewer plugins |
+| `darkMode` | `Boolean` | `false` | Enable dark mode |
 
-| Name     | Type           | Default     | Description |
-| -------- | -------------- | ----------- | ----------- |
-| darkMode | `boolean`      | `false`     | Enable dark mode |
-| plugins  | `PluginName[]` | `[]`        | Array of plugin names to use |
-| value    | `string`       | `undefined` | Markdown content to display |
+#### Exposing
 
-## Plugins
+| Name | Type | Description |
+| --- | --- | --- |
+| `viewer` | `Viewer \| null` | The underlying Toast UI Viewer instance |
 
-This wrapper supports all official Toast UI Editor plugins:
-
-- Code Syntax Highlighting
-- Color Syntax
-- Charts
-- UML diagrams
-- Table Merged Cell
-
-To use plugins, install them separately and include them in your component:
-
-```bash
-npm install @toast-ui/editor-plugin-code-syntax-highlight @toast-ui/editor-plugin-color-syntax
-```
+## 🧩 Using Plugins
 
 ```vue
 <script setup>
-import { ref } from 'vue'
 import { Editor } from '@oeasenet/tui-editor'
 import '@oeasenet/tui-editor/dist/style.css'
+import { mapPlugins } from '@oeasenet/tui-editor/dist/utils/TuiPlugins'
 
-// Import plugins
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
-
-const content = ref('# Hello, world!')
-const plugins = [colorSyntax, codeSyntaxHighlight]
+const plugins = mapPlugins(['chart', 'codeSyntaxHighlight', 'colorSyntax'])
 </script>
 
 <template>
@@ -154,30 +130,13 @@ const plugins = [colorSyntax, codeSyntaxHighlight]
 </template>
 ```
 
-## Documentation
+Available plugins:
+- `chart` - Chart plugin
+- `codeSyntaxHighlight` - Code syntax highlighting
+- `colorSyntax` - Color syntax
+- `tableMergedCell` - Table merged cell
+- `uml` - UML diagrams
 
-For more detailed documentation and examples, visit the [documentation site](https://github.com/oeasenet/tui-editor).
+## 📝 License
 
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Build the library
-npm run build
-
-# Run documentation site in development mode
-npm run docs:dev
-
-# Build documentation site
-npm run docs:build
-```
-
-## License
-
-[MIT](LICENSE) © OEASE Solutions
-
----
-
-*This project is a fork of [tui-editor-vue3](https://github.com/sirmathays/tui-editor-vue3) originally created by [Matti Suoraniemi](https://github.com/sirmathays).*
+MIT

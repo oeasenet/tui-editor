@@ -1,29 +1,78 @@
-import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer'
-import { Ref } from 'vue'
+import { Viewer } from '@toast-ui/editor/dist/toastui-editor-viewer'
+import type { Ref } from 'vue'
+import type { Plugin } from '../utils/TuiPlugins'
 
-interface Options {
+/**
+ * Options for initializing the Toast UI Viewer
+ */
+export interface ViewerOptions {
+    /**
+     * Initial markdown content to display
+     */
     initialValue?: string;
 
-    plugins?: any[];
-    // extendedAutolinks?: ExtendedAutolinks;
-    // linkAttributes?: LinkAttributes;
-    // referenceDefinition?: boolean;
-    // frontMatter?: boolean;
-    // usageStatistics?: boolean;
-    // theme?: string;
+    /**
+     * Plugins to use with the viewer
+     */
+    plugins?: Plugin[];
+
+    /**
+     * Whether to enable extended autolinks
+     */
+    extendedAutolinks?: boolean;
+
+    /**
+     * Attributes to add to links
+     */
+    linkAttributes?: Record<string, string>;
+
+    /**
+     * Whether to enable reference definition
+     */
+    referenceDefinition?: boolean;
+
+    /**
+     * Whether to enable front matter
+     */
+    frontMatter?: boolean;
+
+    /**
+     * Whether to collect usage statistics
+     */
+    usageStatistics?: boolean;
+
+    /**
+     * Theme to use for the viewer
+     */
+    theme?: string;
 }
 
-export default (elRef: Ref<HTMLElement | null>, options: Options) => {
+/**
+ * Creates and initializes a Toast UI Viewer instance
+ *
+ * @param elRef - Reference to the element where the viewer will be mounted
+ * @param options - Viewer initialization options
+ * @returns The initialized Viewer instance
+ * @throws Error if the element reference is null
+ */
+export default function useViewer(elRef: Ref<HTMLElement | null>, options: ViewerOptions): Viewer {
     if (!elRef.value) {
-        throw new Error("Reference to the element is set");
+        throw new Error("Reference to the element is not set");
     }
 
-    const e: Viewer = new Viewer({
+    const viewer = new Viewer({
         el: elRef.value,
-        plugins: options.plugins,
+
+        // Pass through options to the viewer
         initialValue: options.initialValue,
-        customHTMLSanitizer: (html: string) => html,
+        plugins: options.plugins,
+        extendedAutolinks: options.extendedAutolinks,
+        linkAttributes: options.linkAttributes,
+        referenceDefinition: options.referenceDefinition,
+        frontMatter: options.frontMatter,
+        usageStatistics: options.usageStatistics,
+        theme: options.theme,
     });
 
-    return e;
-};
+    return viewer;
+}

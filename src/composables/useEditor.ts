@@ -1,3 +1,7 @@
+/**
+ * Toast UI Editor language imports
+ * Import all available languages to support dynamic language switching
+ */
 import "@toast-ui/editor/dist/i18n/ar";
 import "@toast-ui/editor/dist/i18n/cs-cz";
 import "@toast-ui/editor/dist/i18n/de-de";
@@ -17,44 +21,108 @@ import "@toast-ui/editor/dist/i18n/tr-tr";
 import "@toast-ui/editor/dist/i18n/uk-ua";
 import "@toast-ui/editor/dist/i18n/zh-cn";
 import "@toast-ui/editor/dist/i18n/zh-tw";
-import "@toast-ui/editor/dist/i18n/zh-tw";
 
-import { Ref } from "vue";
-import Editor, { EditorType, PreviewStyle } from "@toast-ui/editor";
-import { ToolbarItemOptions } from "@toast-ui/editor/types/ui";
-import { PluginName, mapPlugins } from "../utils/TuiPlugins";
+import type { Ref } from "vue";
+import TuiEditor, { EditorType, PreviewStyle } from "@toast-ui/editor";
+import type { Editor } from "@toast-ui/editor";
+import type { ToolbarItemOptions } from "@toast-ui/editor/types/ui";
+import type { Plugin } from "../utils/TuiPlugins";
 
+/**
+ * Callback function for handling image URLs
+ */
 export type HookCallback = (url: string, text?: string) => void;
+
+/**
+ * Hook for handling image blob uploads
+ */
 export type AddImageBlobHook = (
     blob: Blob | File,
     callback: HookCallback
 ) => void;
 
-interface Options {
+/**
+ * Options for initializing the Toast UI Editor
+ */
+export interface EditorOptions {
+    /**
+     * Initial markdown content
+     */
     initialValue: string;
 
+    /**
+     * Height of the editor
+     */
     height?: string;
+
+    /**
+     * Whether to hide the mode switch button
+     */
     hideModeSwitch?: boolean;
+
+    /**
+     * Initial edit type (markdown or wysiwyg)
+     */
     initialEditType?: EditorType;
+
+    /**
+     * Language for the editor UI
+     */
     language?: string;
-    plugins?: any[];
+
+    /**
+     * Plugins to use with the editor
+     */
+    plugins?: Plugin[];
+
+    /**
+     * Preview style (tab or vertical)
+     */
     previewStyle?: PreviewStyle;
+
+    /**
+     * Toolbar items to display
+     */
     toolbarItems?: (string | ToolbarItemOptions)[][];
+
+    /**
+     * Whether to collect usage statistics
+     */
     usageStatistics?: boolean;
+
+    /**
+     * Whether to use command shortcuts
+     */
     useCommandShortcut?: boolean;
 
-    onChange?: (e: Editor) => void;
+    /**
+     * Callback for when the editor content changes
+     */
+    onChange?: (editor: Editor) => void;
+
+    /**
+     * Hook for handling image blob uploads
+     */
     addImageBlobHook?: AddImageBlobHook;
 }
 
-export default (elRef: Ref<HTMLElement | null>, options: Options) => {
+/**
+ * Creates and initializes a Toast UI Editor instance
+ *
+ * @param elRef - Reference to the element where the editor will be mounted
+ * @param options - Editor initialization options
+ * @returns The initialized Editor instance
+ * @throws Error if the element reference is null
+ */
+export default function useEditor(elRef: Ref<HTMLElement | null>, options: EditorOptions): Editor {
     if (!elRef.value) {
-        throw new Error("Reference to the element is set");
+        throw new Error("Reference to the element is not set");
     }
 
-    const e: Editor = new Editor({
+    const editor = new TuiEditor({
         el: elRef.value,
 
+        // Pass through options to the editor
         height: options.height,
         hideModeSwitch: options.hideModeSwitch,
         initialEditType: options.initialEditType,
@@ -65,17 +133,17 @@ export default (elRef: Ref<HTMLElement | null>, options: Options) => {
         toolbarItems: options.toolbarItems,
         usageStatistics: options.usageStatistics,
         useCommandShortcut: options.useCommandShortcut,
-        customHTMLSanitizer: (html) => html,
 
+        // Configure events and hooks
         events: {
             change: options.onChange
-                ? () => options.onChange && options.onChange(e)
-                : () => {},
+                ? () => options.onChange?.(editor)
+                : undefined,
         },
         hooks: {
             addImageBlobHook: options.addImageBlobHook,
         },
     });
 
-    return e;
-};
+    return editor;
+}
