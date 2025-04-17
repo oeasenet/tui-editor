@@ -17,7 +17,6 @@ node_modules
 !.yarn/versions
 
 # Build output
-dist
 dist-ssr
 
 # Editor directories and files
