@@ -1,6 +1,6 @@
 {
-    "name": "@cedric.dinont/tui-editor-vue3",
-    "version": "0.1.8",
+    "name": "@oeasenet/tui-editor",
+    "version": "1.0.0",
     "scripts": {
         "build": "rimraf dist && vue-tsc && vite build",
         "docs:dev": "vitepress dev docs",
@@ -17,18 +17,18 @@
         "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
         "@toast-ui/editor-plugin-uml": "^3.0.1",
         "@toast-ui/editor": "^3.2.2",
-        "@types/node": "^20.3.3",
-        "@vitejs/plugin-vue": "^4.2.3",
-        "autoprefixer": "^10.4.13",
-        "postcss-import": "^15.0.1",
-        "postcss-nesting": "^11.3.0",
-        "postcss": "^8.4.24",
-        "rimraf": "^5.0.1",
+        "@types/node": "^22.14.1",
+        "@vitejs/plugin-vue": "^5.2.3",
+        "autoprefixer": "^10.4.21",
+        "postcss-import": "^16.1.0",
+        "postcss-nesting": "^13.0.1",
+        "postcss": "^8.5.3",
+        "rimraf": "^6.0.1",
         "to-mark": "^1.1.9",
-        "typescript": "^5.1.6",
-        "vite": "^4.3.9",
-        "vitepress": "^0.22.4",
-        "vue-tsc": "^1.8.3"
+        "typescript": "^5.8.3",
+        "vite": "^6.3.1",
+        "vitepress": "^1.6.3",
+        "vue-tsc": "^2.2.8"
     },
     "files": [
         "src",
@@ -44,6 +44,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/CedricDinont/tui-editor-vue3#main"
+        "url": "git+https://github.com/oeasenet/tui-editor#main"
     }
 }
