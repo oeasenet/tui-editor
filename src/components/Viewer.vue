@@ -1,18 +1,19 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 /**
  * Toast UI Viewer component for Vue 3
  *
  * Renders markdown content as HTML with the same styling as the editor
  * based on Toast UI Editor Viewer (https://ui.toast.com/tui-editor)
  */
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Viewer as TuiViewer } from '@toast-ui/editor/dist/toastui-editor-viewer'
 import useViewer from '../composables/useViewer'
 import { ViewerProps } from './types'
+import { mapPlugins } from '../utils/TuiPlugins.ts'
 
 // Define component props with defaults
 const props = withDefaults(defineProps<ViewerProps>(), {
-    plugins: () => [],
+    plugins: () => mapPlugins(['chart', 'codeSyntaxHighlight', 'colorSyntax', 'tableMergedCell', 'uml']),
     darkMode: false
 })
 
@@ -38,7 +39,7 @@ onMounted(() => {
     <!-- Viewer container -->
     <div
         ref="viewer"
-        class="tui-viewer-vue3-wrapper"
         :class="{ 'toastui-editor-dark': darkMode }"
+        class="tui-viewer-vue3-wrapper"
     />
 </template>

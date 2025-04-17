@@ -1,32 +1,35 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 /**
  * Toast UI Editor component for Vue 3
  *
  * A full-featured markdown editor with WYSIWYG editing capabilities
  * based on Toast UI Editor (https://ui.toast.com/tui-editor)
  */
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import useEditor from '../composables/useEditor'
-import { EditorProps, EditorInstance } from './types'
+import { EditorInstance, EditorProps } from './types'
 
 // Import the Editor type
 import type { Editor } from '@toast-ui/editor'
+import { mapPlugins } from '../utils/TuiPlugins.ts'
 
 // Define component props with defaults
 const props = withDefaults(defineProps<EditorProps>(), {
     allowFullScreen: true,
     darkMode: false,
-    enhanced: true,
+    enhanced: false,
     height: '500px',
     hideModeSwitch: false,
-    initialEditType: 'markdown',
+    initialEditType: 'wysiwyg',
     modelValue: '',
-    plugins: () => [],
-    previewStyle: 'tab',
+    plugins: () => mapPlugins(['chart', 'codeSyntaxHighlight', 'colorSyntax', 'tableMergedCell', 'uml']),
+    previewStyle: 'vertical',
     toolbarItems: () => [
-        ['heading', 'bold', 'italic'],
-        ['quote', 'ul', 'ol'],
-        ['table', 'link'],
+        ['heading', 'bold', 'italic', 'strike'],
+        ['hr', 'quote'],
+        ['ul', 'ol', 'task', 'indent', 'outdent'],
+        ['table', 'image', 'link'],
+        ['code', 'codeblock'],
     ],
 })
 
@@ -37,9 +40,9 @@ const fullScreen = ref<boolean>(false)
 
 // Define emitted events
 const emit = defineEmits<{
-  'update:modelValue': [value: string]
-  'addImage': [payload: { blob: Blob | File, callback: (url: string, text?: string) => void }]
-  'fullScreenChange': [value: boolean]
+    'update:modelValue': [value: string]
+    'addImage': [payload: { blob: Blob | File, callback: (url: string, text?: string) => void }]
+    'fullScreenChange': [value: boolean]
 }>()
 
 // Expose editor instance to parent components
@@ -86,38 +89,38 @@ onMounted(() => nextTick(() => {
 
 <template>
     <div
-        class="tui-editor-vue3-wrapper"
-        :style="{ height: !fullScreen ? height : undefined }"
-        @keydown.escape="fullScreen = false"
         :class="{
             'tui-editor-vue3-enhanced': enhanced,
             'toastui-full-screen': fullScreen,
             'toastui-editor-dark': darkMode
         }"
+        :style="{ height: !fullScreen ? height : undefined }"
+        class="tui-editor-vue3-wrapper"
+        @keydown.escape="fullScreen = false"
     >
         <!-- Editor container -->
-        <div ref="editorEl" :class="editorClasses" />
+        <div ref="editorEl" :class="editorClasses"/>
 
         <!-- Fullscreen toggle button -->
-        <div class="fullscreen-button-container" v-if="allowFullScreen">
+        <div v-if="allowFullScreen" class="fullscreen-button-container">
             <a
-                href="#"
-                class="fullscreen-button"
-                @click.prevent="fullScreen = !fullScreen"
                 :title="fullScreen ? 'Exit fullscreen' : 'Enter fullscreen'"
+                class="fullscreen-button"
+                href="#"
+                @click.prevent="fullScreen = !fullScreen"
             >
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
                     stroke-width="2"
-                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
+                        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
                     />
                 </svg>
             </a>

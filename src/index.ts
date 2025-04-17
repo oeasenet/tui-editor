@@ -1,6 +1,6 @@
 import { App, Plugin } from 'vue'
 import * as components from './components'
-import './styles/main.scss'
+import './styles/main.css'
 
 /**
  * All available components

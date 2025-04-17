@@ -1,21 +1,22 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
 import lorem from '../lorem'
+import { Editor } from '../../../src'
 
-const darkMode = ref(true)
+const darkMode = ref(false)
 const allowFullScreen = ref(true)
-const enhanced = ref(true)
+const enhanced = ref(false)
 const model = ref(lorem)
 </script>
 
 <template>
     <div>
         <Editor
+            v-model="model"
+            :allow-full-screen="allowFullScreen"
             :dark-mode="darkMode"
             :enhanced="enhanced"
-            :allow-full-screen="allowFullScreen"
             height="350px"
-            v-model="model"
         />
 
         <div class="demo-container-toggle-wrapper">
