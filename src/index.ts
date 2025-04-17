@@ -1,5 +1,6 @@
 import { App } from 'vue'
 import * as components from './components'
+import './styles/main.scss'
 
 function install (app: App) {
   for (const key in components) {
@@ -7,8 +8,6 @@ function install (app: App) {
     app.component(key, components[key])
   }
 }
-
-import './assets/main.pcss'
 
 export default { install }
 

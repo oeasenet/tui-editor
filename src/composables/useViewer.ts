@@ -1,6 +1,5 @@
-import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
-import { Ref } from "vue";
-import { PluginName, mapPlugins } from "../utils/TuiPlugins";
+import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer'
+import { Ref } from 'vue'
 
 interface Options {
     initialValue?: string;
@@ -23,7 +22,7 @@ export default (elRef: Ref<HTMLElement | null>, options: Options) => {
         el: elRef.value,
         plugins: options.plugins,
         initialValue: options.initialValue,
-        customHTMLSanitizer: (html) => html,
+        customHTMLSanitizer: (html: string) => html,
     });
 
     return e;
