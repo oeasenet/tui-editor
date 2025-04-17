@@ -1,6 +1,6 @@
 {
     "name": "@oeasenet/tui-editor",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Vue 3 wrapper components for Toast UI Editor",
     "author": "oeasenet",
     "license": "MIT",
