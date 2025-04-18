@@ -5,6 +5,16 @@
 
 > Vue 3 wrapper components for [TOAST UI Editor](https://ui.toast.com/tui-editor) - a powerful Markdown WYSIWYG editor.
 
+## 🔥 Source Code Distribution
+
+This package is distributed as source code rather than bundled files. This approach offers several advantages:
+
+- **Better tree-shaking**: Your bundler can eliminate unused code more effectively
+- **Smaller bundle size**: No duplicate dependencies or unnecessary code
+- **Consistent build process**: The component is built with your project's settings
+- **Better debugging**: Source maps align with your build process
+- **Customization**: Easier to customize or extend the components
+
 ## 📋 Overview
 
 This library provides Vue 3 components that wrap the Toast UI Editor, offering a seamless integration of this powerful Markdown editor into your Vue applications. The package includes two main components:
@@ -47,7 +57,7 @@ Register the components globally in your Vue application:
 import { createApp } from 'vue'
 import App from './App.vue'
 import TuiEditorPlugin from '@oeasenet/tui-editor'
-import '@oeasenet/tui-editor/dist/tui-editor.css' // Import the CSS
+import '@oeasenet/tui-editor/styles' // Import the CSS
 
 const app = createApp(App)
 app.use(TuiEditorPlugin)
@@ -62,7 +72,7 @@ Import and use the components directly in your Vue components:
 <script setup>
 import { ref } from 'vue'
 import { Editor, Viewer } from '@oeasenet/tui-editor'
-import '@oeasenet/tui-editor/dist/tui-editor.css' // Import the CSS
+import '@oeasenet/tui-editor/styles' // Import the CSS
 
 const content = ref('# Hello, Toast UI Editor!')
 </script>
@@ -149,8 +159,8 @@ The library comes with several plugins pre-configured. By default, all plugins a
 <script setup>
 import { ref } from 'vue'
 import { Editor } from '@oeasenet/tui-editor'
-import '@oeasenet/tui-editor/dist/tui-editor.css'
-import { mapPlugins } from '@oeasenet/tui-editor/dist/utils/TuiPlugins'
+import '@oeasenet/tui-editor/styles'
+import { mapPlugins } from '@oeasenet/tui-editor/src/utils/TuiPlugins'
 
 const content = ref('# Hello, Toast UI Editor!')
 // Only enable specific plugins

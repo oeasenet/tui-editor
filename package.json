@@ -1,6 +1,6 @@
 {
     "name": "@oeasenet/tui-editor",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Vue 3 wrapper components for Toast UI Editor",
     "author": "oeasenet",
     "license": "MIT",
@@ -17,7 +17,8 @@
         "lint": "eslint --ext .ts,.vue src",
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
-        "docs:serve": "vitepress serve docs"
+        "docs:serve": "vitepress serve docs",
+        "prepare": "vue-tsc --project tsconfig.build.json"
     },
     "peerDependencies": {
         "vue": "^3.3.4"
@@ -33,11 +34,11 @@
     },
     "devDependencies": {
         "@types/node": "^22.14.1",
-        "@typescript-eslint/eslint-plugin": "^7.0.0",
-        "@typescript-eslint/parser": "^7.0.0",
+        "@typescript-eslint/eslint-plugin": "^7.18.0",
+        "@typescript-eslint/parser": "^7.18.0",
         "@vitejs/plugin-vue": "^5.2.3",
         "autoprefixer": "^10.4.21",
-        "eslint": "^9.0.0",
+        "eslint": "^9.25.0",
         "eslint-plugin-vue": "^9.33.0",
         "rimraf": "^6.0.1",
         "sass": "^1.86.3",
@@ -47,20 +48,24 @@
         "vue-tsc": "^2.2.8"
     },
     "files": [
-        "dist",
-        "src/"
+        "dist/types",
+        "src"
     ],
-    "main": "./dist/tui-editor-vue3.umd.js",
-    "module": "./dist/tui-editor-vue3.es.js",
+    "main": "./src/index.ts",
+    "module": "./src/index.ts",
     "types": "./dist/types/index.d.ts",
     "exports": {
         ".": {
             "types": "./dist/types/index.d.ts",
-            "import": "./dist/tui-editor-vue3.es.js",
-            "require": "./dist/tui-editor-vue3.umd.js"
+            "import": "./src/index.ts",
+            "require": "./src/index.ts"
         },
-        "./dist/tui-editor.css": "./dist/tui-editor.css"
+        "./styles": "./src/styles/main.css"
     },
+    "sideEffects": [
+        "*.css",
+        "*.vue"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/oeasenet/tui-editor#main"
