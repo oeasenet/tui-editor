@@ -6,12 +6,12 @@
  * based on Toast UI Editor (https://ui.toast.com/tui-editor)
  */
 import { nextTick, onMounted, ref, watch } from 'vue'
-import useEditor from '../composables/useEditor'
+import useEditor from '@/composables/useEditor'
 import { EditorInstance, EditorProps } from './types'
 
 // Import the Editor type
 import type { Editor } from '@toast-ui/editor'
-import { mapPlugins } from '../utils/TuiPlugins.ts'
+import { mapPlugins } from '@/utils/TuiPlugins.ts'
 
 // Define component props with defaults
 const props = withDefaults(defineProps<EditorProps>(), {

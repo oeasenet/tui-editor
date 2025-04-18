@@ -59,7 +59,7 @@
             "import": "./dist/tui-editor-vue3.es.js",
             "require": "./dist/tui-editor-vue3.umd.js"
         },
-        "./dist/style.css": "./dist/style.css"
+        "./dist/tui-editor.css": "./dist/tui-editor.css"
     },
     "repository": {
         "type": "git",

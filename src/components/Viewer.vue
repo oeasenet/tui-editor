@@ -7,9 +7,9 @@
  */
 import { onMounted, ref } from 'vue'
 import { Viewer as TuiViewer } from '@toast-ui/editor/dist/toastui-editor-viewer'
-import useViewer from '../composables/useViewer'
+import useViewer from '@/composables/useViewer'
 import { ViewerProps } from './types'
-import { mapPlugins } from '../utils/TuiPlugins.ts'
+import { mapPlugins } from '@/utils/TuiPlugins'
 
 // Define component props with defaults
 const props = withDefaults(defineProps<ViewerProps>(), {

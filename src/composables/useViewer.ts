@@ -1,6 +1,6 @@
 import { Viewer } from '@toast-ui/editor/dist/toastui-editor-viewer'
 import type { Ref } from 'vue'
-import type { Plugin } from '../utils/TuiPlugins'
+import type { Plugin } from '@/utils/TuiPlugins'
 
 /**
  * Options for initializing the Toast UI Viewer
@@ -55,9 +55,9 @@ export interface ViewerOptions {
  * @returns The initialized Viewer instance
  * @throws Error if the element reference is null
  */
-export default function useViewer(elRef: Ref<HTMLElement | null>, options: ViewerOptions): Viewer {
+export default function useViewer (elRef: Ref<HTMLElement | null>, options: ViewerOptions): Viewer {
     if (!elRef.value) {
-        throw new Error("Reference to the element is not set");
+        throw new Error('Reference to the element is not set')
     }
 
     const viewer = new Viewer({
@@ -72,7 +72,7 @@ export default function useViewer(elRef: Ref<HTMLElement | null>, options: Viewe
         frontMatter: options.frontMatter,
         usageStatistics: options.usageStatistics,
         theme: options.theme,
-    });
+    })
 
-    return viewer;
+    return viewer
 }
