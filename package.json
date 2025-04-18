@@ -1,6 +1,6 @@
 {
     "name": "@oeasenet/tui-editor",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Vue 3 wrapper components for Toast UI Editor",
     "author": "oeasenet",
     "license": "MIT",
@@ -38,16 +38,17 @@
         "@vitejs/plugin-vue": "^5.2.3",
         "autoprefixer": "^10.4.21",
         "eslint": "^9.0.0",
-        "eslint-plugin-vue": "^9.23.0",
+        "eslint-plugin-vue": "^9.33.0",
         "rimraf": "^6.0.1",
-        "sass": "^1.72.0",
+        "sass": "^1.86.3",
         "typescript": "^5.8.3",
-        "vite": "^6.3.1",
+        "vite": "^6.3.2",
         "vitepress": "^1.6.3",
         "vue-tsc": "^2.2.8"
     },
     "files": [
-        "dist"
+        "dist",
+        "src/"
     ],
     "main": "./dist/tui-editor-vue3.umd.js",
     "module": "./dist/tui-editor-vue3.es.js",
