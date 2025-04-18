@@ -1,6 +1,6 @@
 import { Editor, EditorType, PreviewStyle } from '@toast-ui/editor';
 import { ToolbarItemOptions } from '@toast-ui/editor/types/ui';
-import { Plugin } from '../utils/TuiPlugins';
+import { Plugin } from '@/utils/TuiPlugins';
 import { Ref } from 'vue';
 /**
  * Type for the Editor component instance

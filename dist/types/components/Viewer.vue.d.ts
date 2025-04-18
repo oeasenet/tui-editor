@@ -16,6 +16,6 @@ declare const _default: import("vue").DefineComponent<ViewerProps, {
     } | null>;
 }, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ViewerProps> & Readonly<{}>, {
     darkMode: boolean;
-    plugins: import("../utils/TuiPlugins.ts").Plugin[];
+    plugins: import("@/utils/TuiPlugins").Plugin[];
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>;
 export default _default;

@@ -1,6 +1,6 @@
 import { Viewer } from '@toast-ui/editor/dist/toastui-editor-viewer';
 import type { Ref } from 'vue';
-import type { Plugin } from '../utils/TuiPlugins';
+import type { Plugin } from '@/utils/TuiPlugins';
 /**
  * Options for initializing the Toast UI Viewer
  */

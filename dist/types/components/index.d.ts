@@ -1,5 +1,5 @@
-import Editor from './Editor.vue';
-import Viewer from './Viewer.vue';
+import Editor from '@/components/Editor.vue';
+import Viewer from '@/components/Viewer.vue';
 /**
  * Toast UI Editor component for Vue 3
  * Provides a full-featured markdown editor with WYSIWYG editing capabilities

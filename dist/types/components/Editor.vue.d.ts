@@ -24,7 +24,7 @@ declare const _default: import("vue").DefineComponent<EditorProps, {
     hideModeSwitch: boolean;
     initialEditType: import("@toast-ui/editor").EditorType;
     modelValue: string;
-    plugins: import("../utils/TuiPlugins.ts").Plugin[];
+    plugins: import("@/utils/TuiPlugins.ts").Plugin[];
     previewStyle: import("@toast-ui/editor").PreviewStyle;
     toolbarItems: (string | import("@toast-ui/editor/types/ui").ToolbarItemOptions)[][];
 }, {}, {}, {}, string, import("vue").ComponentProvideOptions, false, {}, any>;
